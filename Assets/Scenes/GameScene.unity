@@ -4892,6 +4892,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 1496ed3df92a94d4eab0b38504f7001a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: bd1c864b0baa119439fe77cc7cd03a0b, type: 2}
     - target: {fileID: 919132149155446097, guid: 1496ed3df92a94d4eab0b38504f7001a, type: 3}
       propertyPath: m_Name
       value: GrapplingGun
