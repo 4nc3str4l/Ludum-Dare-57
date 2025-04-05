@@ -5916,8 +5916,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f498218f546d23b4baf680f3d7cef6b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WhileGrapplingFactor: -5
-  WhileNotGrapplingFactor: 10
+  BaseWhileGrapplingFactor: -5
+  BaseWhileNotGrapplingFactor: 10
+  MaxAccelerationMultiplier: 100
+  AccelerationRate: 0.5
   MaxStamina: 100
   CurrentStamina: 100
 --- !u!1001 &3754620846885324729
