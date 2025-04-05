@@ -177,7 +177,7 @@ public class PlayerMovement : MonoBehaviour
         // Movement in air
         if (!grounded)
         {
-            multiplier = 0.01f;
+            multiplier = 0.02f;
             multiplierV = 0.05f;
         }
 
