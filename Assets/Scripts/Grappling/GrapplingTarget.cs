@@ -10,6 +10,8 @@ public class GrapplingTarget : MonoBehaviour
     private Transform m_AttachPoint;
 
     private Vector3 m_InitialScale;
+
+    public SpringJoint AttachedSpring = null;
     
     public Transform AttachPoint => m_AttachPoint;
     
@@ -31,7 +33,7 @@ public class GrapplingTarget : MonoBehaviour
         MyRenderer.material = m_Material;
     }
 
-    public void SetAttachPoint(Vector3 point)
+    public void SetAttachPoint(Vector3 point, Vector3 playerDirection)
     {
         m_IsAttached = false;
         if (m_AttachPoint == null)
@@ -43,6 +45,12 @@ public class GrapplingTarget : MonoBehaviour
         m_AttachPoint.SetParent(null);
         m_AttachPoint.position = point;
         m_AttachPoint.SetParent(transform);
+
+
+        if (AttachedSpring != null)
+        {
+            AttachedSpring.GetComponent<Rigidbody>().AddForce(playerDirection * 500);
+        }
     }
 
     public void OnAttached()

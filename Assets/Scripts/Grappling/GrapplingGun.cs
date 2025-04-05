@@ -110,7 +110,7 @@ public class GrapplingGun : MonoBehaviour
         
         OnGrappling?.Invoke(true);
         OnShoot?.Invoke();
-        m_TargetInSight.SetAttachPoint(m_LastHit.point);
+        m_TargetInSight.SetAttachPoint(m_LastHit.point, (m_LastHit.point - transform.position).normalized);
     }
     
     private void StopGrapple()
