@@ -13,6 +13,9 @@ public class GrapplingGun : MonoBehaviour
     public delegate void OnGrapplingHandler(bool isGrappling);
     public static event OnGrapplingHandler OnGrappling;
 
+    private GrapplingTarget m_TargetInSight = null;
+    private RaycastHit m_LastHit;
+
     private void OnEnable()
     {
         GrapplingStamina.OnStaminaEmpty += GrapplingStaminaOnOnStaminaEmpty;
@@ -45,32 +48,58 @@ public class GrapplingGun : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (IsGrappling())
+        {
+            return;
+        }
+        
+        if (Physics.Raycast(camera.position, camera.forward, out m_LastHit, maxDistance, whatIsGrappleable))
+        {
+            m_TargetInSight = m_LastHit.collider.gameObject.GetComponent<GrapplingTarget>();
+            m_TargetInSight?.Highlight();
+        }
+        else
+        {
+            if (m_TargetInSight != null)
+            {
+                m_TargetInSight.Unhighlight();
+            }
+            m_TargetInSight = null;
+        }
+        
+    }
+
     /// <summary>
     ///     Call whenever we want to start a grapple
     /// </summary>
     private void StartGrapple()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(camera.position, camera.forward, out hit, maxDistance, whatIsGrappleable))
+        if (m_TargetInSight == null)
         {
-            grapplePoint = hit.point;
-            joint = player.gameObject.AddComponent<SpringJoint>();
-            joint.autoConfigureConnectedAnchor = false;
-            joint.connectedAnchor = grapplePoint;
-
-            var distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
-
-            //The distance grapple will try to keep from grapple point. 
-            joint.maxDistance = distanceFromPoint * 0.8f;
-            joint.minDistance = distanceFromPoint * 0.25f;
-
-            //Adjust these values to fit your game.
-            joint.spring = 4.5f;
-            joint.damper = 7f;
-            joint.massScale = 4.5f;
-            
-            OnGrappling?.Invoke(true);
+            return;
         }
+        
+        m_TargetInSight.Unhighlight();
+        grapplePoint = m_LastHit.point;
+        joint = player.gameObject.AddComponent<SpringJoint>();
+        joint.autoConfigureConnectedAnchor = false;
+        joint.connectedAnchor = grapplePoint;
+
+        var distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
+
+        //The distance grapple will try to keep from grapple point. 
+        joint.maxDistance = distanceFromPoint * 0.8f;
+        joint.minDistance = distanceFromPoint * 0.25f;
+
+        //Adjust these values to fit your game.
+        joint.spring = 4.5f;
+        joint.damper = 7f;
+        joint.massScale = 4.5f;
+        
+        OnGrappling?.Invoke(true);
+        
     }
     
     private void StopGrapple()
