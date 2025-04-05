@@ -113,6 +113,7 @@ public class PlayerMovement : MonoBehaviour
     {
         x = Input.GetAxisRaw("Horizontal");
         y = Input.GetAxisRaw("Vertical");
+        
         jumping = Input.GetButton("Jump");
 
         crouching = Input.GetKey(KeyCode.LeftControl);
@@ -239,7 +240,7 @@ public class PlayerMovement : MonoBehaviour
         //Slow down sliding
         if (crouching)
         {
-            rb.AddForce(moveSpeed * Time.deltaTime * -rb.linearVelocity.normalized * slideCounterMovement);
+            rb.AddForce(-rb.linearVelocity.normalized * (moveSpeed * Time.deltaTime * slideCounterMovement));
             return;
         }
 
