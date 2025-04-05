@@ -56,6 +56,8 @@ public class GrapplingGun : MonoBehaviour
     {
         if (IsGrappling())
         {
+            joint.connectedAnchor = m_TargetInSight.AttachPoint.position;
+            Debug.Log(joint.connectedAnchor);
             return;
         }
         
@@ -92,19 +94,17 @@ public class GrapplingGun : MonoBehaviour
         joint.connectedAnchor = grapplePoint;
 
         var distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
-
-        //The distance grapple will try to keep from grapple point. 
+        
         joint.maxDistance = distanceFromPoint * 0.8f;
         joint.minDistance = distanceFromPoint * 0.25f;
 
-        //Adjust these values to fit your game.
-        joint.spring = 4.5f;
+        joint.spring = 10f;
         joint.damper = 7f;
         joint.massScale = 4.5f;
         
         OnGrappling?.Invoke(true);
         OnShoot?.Invoke();
-        
+        m_TargetInSight.SetAttachPoint(m_LastHit.point);
     }
     
     private void StopGrapple()
@@ -125,6 +125,6 @@ public class GrapplingGun : MonoBehaviour
 
     public Vector3 GetGrapplePoint()
     {
-        return grapplePoint;
+        return m_TargetInSight.AttachPoint.position;
     }
 }
