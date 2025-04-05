@@ -14,6 +14,8 @@ public class GrapplingRope : MonoBehaviour
     private LineRenderer lr;
     private Spring spring;
 
+
+    
     private void Awake()
     {
         lr = GetComponent<LineRenderer>();

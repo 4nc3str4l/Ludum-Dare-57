@@ -15,6 +15,10 @@ public class GrapplingGun : MonoBehaviour
 
     private GrapplingTarget m_TargetInSight = null;
     private RaycastHit m_LastHit;
+    
+    public delegate void OnShootHandler();
+
+    public event OnShootHandler OnShoot;
 
     private void OnEnable()
     {
@@ -99,6 +103,7 @@ public class GrapplingGun : MonoBehaviour
         joint.massScale = 4.5f;
         
         OnGrappling?.Invoke(true);
+        OnShoot?.Invoke();
         
     }
     

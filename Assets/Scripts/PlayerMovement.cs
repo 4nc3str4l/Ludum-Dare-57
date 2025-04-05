@@ -207,6 +207,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.linearVelocity = new Vector3(vel.x, vel.y / 2, vel.z);
 
             Invoke(nameof(ResetJump), jumpCooldown);
+            JukeBox.Instance.PlaySound(JukeBox.Instance.Jump, 0.5f);
         }
     }
 
