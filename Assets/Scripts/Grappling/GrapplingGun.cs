@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GrapplingGun : MonoBehaviour
@@ -9,14 +10,36 @@ public class GrapplingGun : MonoBehaviour
     private SpringJoint joint;
     private readonly float maxDistance = 100f;
 
+    public delegate void OnGrapplingHandler(bool isGrappling);
+    public static event OnGrapplingHandler OnGrappling;
+
+    private void OnEnable()
+    {
+        GrapplingStamina.OnStaminaEmpty += GrapplingStaminaOnOnStaminaEmpty;
+    }
+    
+    
+    private void OnDisable()
+    {
+        GrapplingStamina.OnStaminaEmpty -= GrapplingStaminaOnOnStaminaEmpty;
+    }
+
+    private void GrapplingStaminaOnOnStaminaEmpty()
+    {
+        if(IsGrappling())
+        {
+            StopGrapple();
+        }
+    }
+    
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && GrapplingStamina.HasSomeStamina)
         {
-            
             StartGrapple();
         }
-        else if (Input.GetMouseButtonUp(0)) 
+        
+        if (Input.GetMouseButtonUp(0) && IsGrappling()) 
         {
            StopGrapple();
         }
@@ -45,10 +68,18 @@ public class GrapplingGun : MonoBehaviour
             joint.spring = 4.5f;
             joint.damper = 7f;
             joint.massScale = 4.5f;
+            
+            OnGrappling?.Invoke(true);
         }
     }
     
     private void StopGrapple()
+    {
+        RemoveJoin();
+        OnGrappling?.Invoke(false);
+    }
+
+    private void RemoveJoin()
     {
         Destroy(joint);
     }
