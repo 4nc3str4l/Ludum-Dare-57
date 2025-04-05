@@ -30,7 +30,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.15791047, w: 0.9874535}
   m_LocalPosition: {x: 17.1828, y: 22.4137, z: 44.2649}
-  m_LocalScale: {x: 183.48033, y: 0.1539, z: 2.4803016}
+  m_LocalScale: {x: 183.48033, y: 2.7670646, z: 2.4803016}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -123,3 +123,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HighLightMaterial: {fileID: 2100000, guid: 09081faa6458a3447b57128cd5dd1f37, type: 2}
   MyRenderer: {fileID: 7914917590698022440}
+  AttachedSpring: {fileID: 0}
