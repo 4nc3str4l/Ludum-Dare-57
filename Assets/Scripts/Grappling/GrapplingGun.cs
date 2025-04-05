@@ -9,6 +9,8 @@ public class GrapplingGun : MonoBehaviour
     private Vector3 grapplePoint;
     private SpringJoint joint;
     private readonly float maxDistance = 100f;
+    
+    public static GrapplingGun Instance;
 
     public delegate void OnGrapplingHandler(bool isGrappling);
     public static event OnGrapplingHandler OnGrappling;
@@ -19,6 +21,11 @@ public class GrapplingGun : MonoBehaviour
     public delegate void OnShootHandler();
 
     public event OnShootHandler OnShoot;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     private void OnEnable()
     {
@@ -57,7 +64,6 @@ public class GrapplingGun : MonoBehaviour
         if (IsGrappling())
         {
             joint.connectedAnchor = m_TargetInSight.AttachPoint.position;
-            Debug.Log(joint.connectedAnchor);
             return;
         }
         
@@ -111,6 +117,7 @@ public class GrapplingGun : MonoBehaviour
     {
         RemoveJoin();
         OnGrappling?.Invoke(false);
+        JukeBox.Instance.PlaySound(JukeBox.Instance.Jump, 0.5f);
     }
 
     private void RemoveJoin()
@@ -123,8 +130,8 @@ public class GrapplingGun : MonoBehaviour
         return joint != null;
     }
 
-    public Vector3 GetGrapplePoint()
+    public GrapplingTarget GetTargetInSight()
     {
-        return m_TargetInSight.AttachPoint.position;
+        return m_TargetInSight;
     }
 }

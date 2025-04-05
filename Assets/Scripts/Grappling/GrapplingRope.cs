@@ -51,7 +51,8 @@ public class GrapplingRope : MonoBehaviour
         spring.SetStrength(strength);
         spring.Update(Time.deltaTime);
 
-        var grapplePoint = grapplingGun.GetGrapplePoint();
+        GrapplingTarget targetInSight = grapplingGun.GetTargetInSight();
+        var grapplePoint = targetInSight.AttachPoint.position;
         var gunTipPosition = grapplingGun.gunTip.position;
         var up = Quaternion.LookRotation((grapplePoint - gunTipPosition).normalized) * Vector3.up;
 
@@ -63,6 +64,11 @@ public class GrapplingRope : MonoBehaviour
             var offset = up * (waveHeight * Mathf.Sin(delta * waveCount * Mathf.PI) * spring.Value * affectCurve.Evaluate(delta));
 
             lr.SetPosition(i, Vector3.Lerp(gunTipPosition, currentGrapplePosition, delta) + offset);
+
+            if (Vector3.Distance(currentGrapplePosition,  grapplePoint) < 0.5f)
+            {
+                targetInSight.OnAttached(); 
+            }
         }
     }
 }

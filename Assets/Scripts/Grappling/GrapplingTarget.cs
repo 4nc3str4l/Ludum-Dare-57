@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 public class GrapplingTarget : MonoBehaviour
 { 
@@ -7,11 +8,16 @@ public class GrapplingTarget : MonoBehaviour
     public Renderer MyRenderer;
     
     private Transform m_AttachPoint;
+
+    private Vector3 m_InitialScale;
     
     public Transform AttachPoint => m_AttachPoint;
     
+    private bool m_IsAttached = false;
+    
     private void Awake()
     {
+        m_InitialScale = transform.localScale;
         m_Material = MyRenderer.material;
     }
 
@@ -27,6 +33,7 @@ public class GrapplingTarget : MonoBehaviour
 
     public void SetAttachPoint(Vector3 point)
     {
+        m_IsAttached = false;
         if (m_AttachPoint == null)
         {
             GameObject go = new GameObject();
@@ -36,5 +43,16 @@ public class GrapplingTarget : MonoBehaviour
         m_AttachPoint.SetParent(null);
         m_AttachPoint.position = point;
         m_AttachPoint.SetParent(transform);
+    }
+
+    public void OnAttached()
+    {
+        if (m_IsAttached)
+        {
+            return;
+        }
+        m_IsAttached = true;
+        JukeBox.Instance.PlaySound(JukeBox.Instance.Hit, 0.3f);
+        transform.DOShakeScale(0.2f, 0.5f).OnComplete(() => transform.localScale = m_InitialScale);
     }
 }

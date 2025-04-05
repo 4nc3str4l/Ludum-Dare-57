@@ -23,7 +23,12 @@ public class GameController : MonoBehaviour
     {
         CanyonFloor.OnPlayerCollision -= CanyonFloorOnonPlayerCollision;
     }
-    
+
+    private void Start()
+    {
+        JukeBox.Instance.EnableAudioSource(JukeBox.Instance.WindAudioSource, 0.5f);
+    }
+
     void CanyonFloorOnonPlayerCollision()
     {
         JukeBox.Instance.PlaySound(JukeBox.Instance.Hit, 0.8f);

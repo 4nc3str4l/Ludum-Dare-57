@@ -12,6 +12,7 @@ public class JukeBox : MonoBehaviour
     public AudioClip Jump;
 
     public AudioSource Hanging;
+    public AudioSource WindAudioSource;
 
     private void Awake()
     {
@@ -51,6 +52,11 @@ public class JukeBox : MonoBehaviour
     public void DisableAudioSource(AudioSource s)
     {
         s.Stop();
+    }
+
+    public void SetAudioSourceVolume(AudioSource s, float volume)
+    {
+        s.volume = volume * SoundManager.Instance.Voulume;
     }
 
 }

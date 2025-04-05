@@ -16,7 +16,7 @@ public class RotateGun : MonoBehaviour
         }
         else
         {
-            desiredRotation = Quaternion.LookRotation(grappling.GetGrapplePoint() - transform.position);
+            desiredRotation = Quaternion.LookRotation(grappling.GetTargetInSight().AttachPoint.position - transform.position);
         }
         transform.rotation = Quaternion.Lerp(transform.rotation, desiredRotation, Time.deltaTime * rotationSpeed);
     }

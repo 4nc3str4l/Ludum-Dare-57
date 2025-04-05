@@ -66,6 +66,16 @@ public class PlayerMovement : MonoBehaviour
     {
         MyInput();
         Look();
+
+        if (GrapplingGun.Instance.IsGrappling())
+        {
+            JukeBox.Instance.SetAudioSourceVolume(JukeBox.Instance.WindAudioSource,
+                Mathf.Clamp(0.5f * rb.linearVelocity.magnitude / 50.0f, 0.5f, 1));
+        }
+        else
+        {
+            JukeBox.Instance.SetAudioSourceVolume(JukeBox.Instance.WindAudioSource, 0.5f);
+        }
     }
 
 
