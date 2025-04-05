@@ -60,12 +60,20 @@ public class PlayerMovement : MonoBehaviour
         playerScale = transform.localScale;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        transform.parent.position = GameController.Instance.PlayerSpawnPosition.position;
+        transform.parent.rotation = GameController.Instance.PlayerSpawnPosition.rotation;
+        rb.position = GameController.Instance.PlayerSpawnPosition.position;
+        
+        Debug.Log("Start " + transform.position);
+        Debug.Log("Start" +transform.parent.position);
     }
 
     private void Update()
     {
         MyInput();
         Look();
+        Debug.Log("Update " + transform.position);
 
         if (GrapplingGun.Instance.IsGrappling())
         {

@@ -7,10 +7,15 @@ public class GameController : MonoBehaviour
 {
     
     public static GameController Instance;
+    
+    public Transform PlayerSpawnPosition;
+    public Transform MoneySpawnPosition;
 
     private void Awake()
     {
         Instance = this;
+        PlayerSpawnPosition = CheckpointManager.Instance.GetPlayerPositionForCheckpointIdx(CheckpointManager.Instance.CurrentCheckpoint);
+        MoneySpawnPosition = CheckpointManager.Instance.GetMoneyForCheckpointIdx(CheckpointManager.Instance.CurrentCheckpoint);
     }
 
     private void OnEnable()
