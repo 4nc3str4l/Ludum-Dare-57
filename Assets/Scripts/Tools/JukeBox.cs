@@ -11,6 +11,10 @@ public class JukeBox : MonoBehaviour
     public AudioClip Death;
     public AudioClip Jump;
 
+    public AudioClip Hellyeah;
+    public AudioClip Noo;
+    public AudioClip Grounded;
+
     public AudioSource Hanging;
     public AudioSource WindAudioSource;
 

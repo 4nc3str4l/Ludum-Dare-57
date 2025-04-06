@@ -12,8 +12,18 @@ public class Checkpoint : MonoBehaviour
 
     private void Awake()
     {
-        PlayerTransformPosition.GetComponent<Renderer>().enabled = false;
-        MoneyTransformPosition.GetComponent<Renderer>().enabled = false; 
+        Renderer playerRenderer = PlayerTransformPosition.GetComponent<Renderer>();
+        Renderer moneyRenderer = MoneyTransformPosition.GetComponent<Renderer>();
+        if(playerRenderer != null)
+        {
+            playerRenderer.enabled = false;
+        }
+        
+        if(moneyRenderer != null)
+        {
+            moneyRenderer.enabled = false;
+        }
+        
         gameObject.GetComponent<Renderer>().enabled = false;
         CheckpointManager.Instance.RegisterCheckpoint(this);
     }

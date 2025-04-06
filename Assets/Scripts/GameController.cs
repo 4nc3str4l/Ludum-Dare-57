@@ -21,12 +21,24 @@ public class GameController : MonoBehaviour
     private void OnEnable()
     {
         CanyonFloor.OnPlayerCollision += CanyonFloorOnonPlayerCollision;
+        EndBankNote.OnFinalBanknoteTaken += EndBankNoteOnOnFinalBanknoteTaken;
+
+    }
+
+    private void EndBankNoteOnOnFinalBanknoteTaken()
+    {
+        CheckpointManager.Instance.ResetCheckpoints();
+        JukeBox.Instance.PlaySound(JukeBox.Instance.Hellyeah, 0.2f);
+        StartCoroutine(
+            WaitAndExecute(() => {SceneManager.LoadScene("WinScene"); }, JukeBox.Instance.Hellyeah.length)
+        );
 
     }
 
     private void OnDisable()
     {
         CanyonFloor.OnPlayerCollision -= CanyonFloorOnonPlayerCollision;
+        EndBankNote.OnFinalBanknoteTaken += EndBankNoteOnOnFinalBanknoteTaken;
     }
 
     private void Start()
@@ -47,10 +59,16 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            CheckpointManager.Instance.ResetCheckpoints();
-            Debug.Log("Checkpoints Reset");
+            StartCoroutine(
+                WaitAndExecute(() => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); }, 0.2f)
+            );
+        }
+        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenuScene");
         }
     }
 

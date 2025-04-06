@@ -42,6 +42,11 @@ public class CheckpointManager : MonoBehaviour
         PlayerPrefs.DeleteKey("checkpoint");
     }
 
+    public static void ResetProgress()
+    {
+        PlayerPrefs.DeleteKey("checkpoint");
+    }
+
     public void FireOnCheckpointTriggered(int checkpoint)
     {
         Debug.Log($"FireOnCheckpointTriggered {checkpoint}");
