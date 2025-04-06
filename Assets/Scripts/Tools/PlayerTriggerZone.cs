@@ -5,12 +5,14 @@ public class PlayerTriggerZone : MonoBehaviour
 {
     public UnityEvent Trigger;
     
+    private bool HasAlreadyTriggered = false;
+    
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponentInChildren<PlayerMovement>() != null)
+        if (!HasAlreadyTriggered && other.GetComponentInChildren<PlayerMovement>() != null)
         {
-            Debug.Log("Is it firing??");
-           Trigger?.Invoke(); 
+            HasAlreadyTriggered = true;
+            Trigger?.Invoke(); 
         }
     }
 }
