@@ -11,7 +11,10 @@ public class SoundManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        UpdateVolumeUI();
+        if (TxtVolume != null)
+        {
+            UpdateVolumeUI();
+        }
     }
 
     private void Start()

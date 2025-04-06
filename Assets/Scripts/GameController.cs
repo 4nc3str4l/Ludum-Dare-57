@@ -59,6 +59,11 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            CheckpointManager.Instance.ResetCheckpoints();
+        }   
+        
         if (Input.GetKeyDown(KeyCode.R))
         {
             StartCoroutine(

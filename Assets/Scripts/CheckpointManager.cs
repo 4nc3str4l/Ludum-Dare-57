@@ -79,8 +79,11 @@ public class CheckpointManager : MonoBehaviour
         Transform transformToReturn =null;
         foreach(Checkpoint c in m_Checkpoints)
         {
-            transformToReturn = c.MoneyTransformPosition;
-            break;
+            if (c.Index == _checkpointIdx)
+            {
+                transformToReturn = c.MoneyTransformPosition;
+                break;
+            }
         }
         return transformToReturn;
     }
