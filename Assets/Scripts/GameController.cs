@@ -43,7 +43,17 @@ public class GameController : MonoBehaviour
             WaitAndExecute(() => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); }, 0.5f)
         );
     }
-    
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            CheckpointManager.Instance.ResetCheckpoints();
+            Debug.Log("Checkpoints Reset");
+        }
+    }
+
     IEnumerator WaitAndExecute(Action _toExecute , float _delay)
     {
         yield return new WaitForSeconds(_delay);

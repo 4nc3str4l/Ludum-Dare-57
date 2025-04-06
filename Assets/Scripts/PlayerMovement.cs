@@ -63,17 +63,14 @@ public class PlayerMovement : MonoBehaviour
 
         transform.parent.position = GameController.Instance.PlayerSpawnPosition.position;
         transform.parent.rotation = GameController.Instance.PlayerSpawnPosition.rotation;
-        rb.position = GameController.Instance.PlayerSpawnPosition.position;
-        
-        Debug.Log("Start " + transform.position);
-        Debug.Log("Start" +transform.parent.position);
+        rb.position = GameController.Instance.PlayerSpawnPosition.position; 
+        rb.rotation = GameController.Instance.PlayerSpawnPosition.rotation;
     }
 
     private void Update()
     {
         MyInput();
         Look();
-        Debug.Log("Update " + transform.position);
 
         if (GrapplingGun.Instance.IsGrappling())
         {

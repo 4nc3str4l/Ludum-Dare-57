@@ -512,6 +512,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2696adac4fc20f143a9a07b50f6530d2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1184328359536375881}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2696adac4fc20f143a9a07b50f6530d2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6974841201007342699}
   m_SourcePrefab: {fileID: 100100000, guid: 2696adac4fc20f143a9a07b50f6530d2, type: 3}
 --- !u!23 &5074017504588792744 stripped
 MeshRenderer:
@@ -711,3 +714,16 @@ MonoBehaviour:
   HighLightMaterial: {fileID: 2100000, guid: 09081faa6458a3447b57128cd5dd1f37, type: 2}
   MyRenderer: {fileID: 5074017504588792744}
   AttachedSpring: {fileID: 1123407463301236432}
+--- !u!114 &6974841201007342699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6731320659178070653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df9f0218bb889d14fbfe2359ad0cd6d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Handle: {fileID: 1123407463301236432}

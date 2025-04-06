@@ -49,7 +49,7 @@ public class GrapplingTarget : MonoBehaviour
 
         if (AttachedSpring != null)
         {
-            AttachedSpring.GetComponent<Rigidbody>().AddForce(playerDirection * 500);
+            AttachedSpring.GetComponent<Rigidbody>().AddForce(playerDirection * 2000);
         }
     }
 
