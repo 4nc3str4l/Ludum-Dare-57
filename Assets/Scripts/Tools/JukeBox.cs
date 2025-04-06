@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class JukeBox : MonoBehaviour
 {
@@ -63,4 +65,8 @@ public class JukeBox : MonoBehaviour
         s.volume = volume * SoundManager.Instance.Voulume;
     }
 
+    private void OnDestroy()
+    {
+        Instance = null;
+    }
 }

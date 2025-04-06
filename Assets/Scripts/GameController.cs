@@ -38,7 +38,7 @@ public class GameController : MonoBehaviour
     private void OnDisable()
     {
         CanyonFloor.OnPlayerCollision -= CanyonFloorOnonPlayerCollision;
-        EndBankNote.OnFinalBanknoteTaken += EndBankNoteOnOnFinalBanknoteTaken;
+        EndBankNote.OnFinalBanknoteTaken -= EndBankNoteOnOnFinalBanknoteTaken;
     }
 
     private void Start()
@@ -81,5 +81,11 @@ public class GameController : MonoBehaviour
     {
         yield return new WaitForSeconds(_delay);
         _toExecute?.Invoke();
+    }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+        Instance = null;
     }
 }

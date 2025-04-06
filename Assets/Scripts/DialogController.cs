@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -14,7 +15,6 @@ public class DialogController : MonoBehaviour
     public string IThoughtIWouldDie = "Wow I thought I would die!!! All for 50 bucks, where are them???!!";
     
     public string WTFIsThisPlace = "Wtf is this place? And where is my ***** money!!! I am hungry!!";
-    
     
     public string YesHereTheyAre = "Yayyy here you are! I am hungry!";
 
@@ -124,8 +124,12 @@ public class DialogController : MonoBehaviour
             TMPTypewriter.Instance.TypeBySpeed(TxtDialog, OhhManThisWind, 20.0f, () =>
             {
                 HideTextAfterDelay(3.0f);
+                foreach(var re in Banknote.GetComponentsInChildren<Renderer>())
+                {
+                    re.enabled = false;
+                }
             });
-        }, 2.0f);   
+        }, 1.0f);   
     }
 
     private void ThirdDialog()
@@ -172,5 +176,11 @@ public class DialogController : MonoBehaviour
     {
         yield return new WaitForSeconds(_delay);
         _toExecute?.Invoke();
+    }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+        DOTween.Clear();
     }
 }

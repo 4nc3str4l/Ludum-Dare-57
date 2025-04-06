@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using TMPro;
 
 public class SoundManager : MonoBehaviour
@@ -46,5 +47,10 @@ public class SoundManager : MonoBehaviour
     private void UpdateVolumeUI()
     {
         TxtVolume.text = $"[K] Up / [L] Low Vol, Current: {Mathf.RoundToInt(Voulume * 100)}%";
+    }
+
+    private void OnDestroy()
+    {
+        Instance = null;
     }
 }

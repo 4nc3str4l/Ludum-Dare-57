@@ -6,21 +6,7 @@ using System.Collections.Generic;
 
 public class TMPTypewriter : MonoBehaviour
 {
-    // Singleton instance
-    private static TMPTypewriter _instance;
-    public static TMPTypewriter Instance 
-    {
-        get 
-        {
-            if (_instance == null) 
-            {
-                GameObject go = new GameObject("TMPTypewriter");
-                _instance = go.AddComponent<TMPTypewriter>();
-                DontDestroyOnLoad(go);
-            }
-            return _instance;
-        }
-    }
+    public static TMPTypewriter Instance = null;
 
     // Audio settings
     [Header("Audio Settings")]
@@ -35,16 +21,7 @@ public class TMPTypewriter : MonoBehaviour
 
     private void Awake()
     {
-        // Ensure singleton pattern
-        if (_instance != null && _instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        
-        _instance = this;
-        DontDestroyOnLoad(gameObject);
-        
+        Instance = this;
         // Create audio source if not assigned
         if (audioSource == null)
         {
@@ -135,7 +112,7 @@ public class TMPTypewriter : MonoBehaviour
                 if (playSound && typeSound != null)
                 {
                     // Randomize pitch for each character
-                    audioSource.volume = SoundManager.Instance.Voulume * 0.1f;
+                    audioSource.volume = SoundManager.Instance.Voulume * 0.05f;
                     audioSource.pitch = UnityEngine.Random.Range(minPitch, maxPitch);
                     audioSource.PlayOneShot(typeSound);
                 }
@@ -155,5 +132,11 @@ public class TMPTypewriter : MonoBehaviour
         }
         
         onComplete?.Invoke();
+    }
+
+    private void OnDestroy()
+    {
+        StopAllCoroutines();
+        Instance = null;
     }
 }

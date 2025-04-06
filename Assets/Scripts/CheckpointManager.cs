@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CheckpointManager : MonoBehaviour
@@ -86,5 +87,10 @@ public class CheckpointManager : MonoBehaviour
             }
         }
         return transformToReturn;
+    }
+
+    private void OnDestroy()
+    {
+        Instance = this;
     }
 }

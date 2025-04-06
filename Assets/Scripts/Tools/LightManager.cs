@@ -73,5 +73,7 @@ public void MakeNightTime(bool instant = false)
         RenderSettings.reflectionIntensity = 0f; 
         directionalLight.intensity = nightLightIntensity;
         skyboxMaterial.SetFloat("_Exposure", nightSkyboxIntensity);
+        Camera.main.backgroundColor = Color.black;
+        
     }
 }
